@@ -1,8 +1,8 @@
-# Solana CLI Wallet
+# Solana CLI Wallet (`scw`) - Exercise 01
 
 ## Overview
 
-This CLI wallet application for Solana blockchain allows users to create new wallets, request airdrops, transfer SOL to other wallets, and check balances.
+This CLI application is designed to interact with the Solana blockchain. It supports functionalities like creating wallets, requesting airdrops, transferring SOL between wallets, and querying account balances.
 
 ## Prerequisites
 
@@ -19,52 +19,92 @@ This CLI wallet application for Solana blockchain allows users to create new wal
     ```
 
 2. **Build the Project**
-   Navigate to the project directory and run:
+
+    Navigate to the project directory and build the project:
 
     ```sh
     cargo build --release
     ```
 
 3. **Start Solana Test Validator**
-   Before interacting with your CLI wallet, start the Solana test validator:
+
+    To interact with your CLI wallet, start the Solana test validator on another terminal:
+
     ```sh
     solana-test-validator
     ```
-    This will set up a local Solana blockchain that you can use for testing.
-    - This is being used because the project is set up to use a local test validator, which is running on `http://localhost:8899`.
+
+    This sets up a local Solana blockchain instance suitable for development and testing, running on `http://localhost:8899` (which is the default RPC URL on the project).
 
 ## Usage
 
-1. **Create a Wallet**
-   Generates a new wallet (keypair) and saves it locally.
+### Create a Wallet
 
-    ```sh
-    ./target/release/exercise-01 create-wallet
-    ```
+Generates a new wallet (keypair) and saves it to a specified file.
 
-2. **Request Airdrop**
-   Requests SOL from the local test validator.
+```sh
+❯ scw create -f my_wallet.json
+Wallet created and saved to: my_wallet.json
+Public key: 5UGwCSzNHDUQLZr78LpNDFiynQ6S9zvB9rUCUa87ufv5
 
-    ```sh
-    ./target/release/exercise-01 request-airdrop [PUBLIC_KEY] [AMOUNT]
-    ```
+❯ scw create -f recipient_wallet.json
+Wallet created and saved to: recipient_wallet.json
+Public key: 3DgZaDJ2RUWdq1cjwCPEgVkM9wKXPBxHEoyKfsA4bk5F
+```
 
-    - Replace `[PUBLIC_KEY]` with your wallet's public key.
-    - Replace `[AMOUNT]` with the number of SOL to request.
+### Request Airdrop
 
-3. **Check Balance**
-   Displays the balance of a specified wallet.
+Requests SOL tokens from the test validator to the specified wallet.
 
-    ```sh
-    ./target/release/exercise-01 balance [PUBLIC_KEY]
-    ```
+```sh
+❯ scw airdrop -w XyE2uztdZH4b58nX1VfcF5PQyZn5BQsjRQt2PHRFWfR -a 2
+Airdrop successful: Signature 5Li85sA81p4FWe2u5QBb2RYAD7q7SPaBd5UHrjmU9bbXTsy5BHpe7qZh8YXhTSUdW5dNzJkUTTS9feSPu3DF1EL1
+```
 
-    - Replace `[PUBLIC_KEY]` with the wallet's public key.
+### Check Balance
 
-4. **Transfer SOL**
-   Transfers SOL from the primary wallet to another wallet.
-    ```sh
-    ./target/release/exercise-01 transfer [RECEIVER_PUBLIC_KEY] [AMOUNT]
-    ```
-    - Replace `[RECEIVER_PUBLIC_KEY]` with the recipient's public key.
-    - Replace `[AMOUNT]` with the number of SOL to transfer.
+Displays the balance of a specified wallet.
+
+```sh
+❯ scw balance -w XyE2uztdZH4b58nX1VfcF5PQyZn5BQsjRQt2PHRFWfR
+Balance: 2 SOL
+
+❯ scw balance -w D5RRG81T72Faaw4GqCgQr54roRkgmB2GXCsGK8GXu9Hu
+Balance: 0 SOL
+```
+
+### Transfer SOL
+
+Transfers SOL from one wallet to another using specified public keys.
+
+```sh
+❯ scw transfer -f my_wallet.json -t D5RRG81T72Faaw4GqCgQr54roRkgmB2GXCsGK8GXu9Hu -a 0.5
+Transfer successful: Signature 5jbPjga3ZDCgpw3EwVCiaRDqEcRKK2di1uxCr6GRyL2NJf9zNfxcP6C8qREiguamWYmNB8qgsodxevexKBG7NsLq
+
+❯ scw balance -w XyE2uztdZH4b58nX1VfcF5PQyZn5BQsjRQt2PHRFWfR # Sender
+Balance: 1.499995
+
+❯ scw balance -w D5RRG81T72Faaw4GqCgQr54roRkgmB2GXCsGK8GXu9Hu # Receiver
+Balance: 0.5 SOL
+```
+
+### Set Network Configuration
+
+Set the network to localnet, devnet, or testnet.
+
+```sh
+❯ scw set-config -n devnet
+Network set to: https://api.devnet.solana.com
+```
+
+### List Wallets
+
+Lists all saved wallets and their details from a specified directory or file.
+
+```sh
+❯ scw list-wallets -f my_wallet.json
+Public key: XyE2uztdZH4b58nX1VfcF5PQyZn5BQsjRQt2PHRFWfR
+
+❯ scw list-wallets -f recipient_wallet.json
+Public key: D5RRG81T72Faaw4GqCgQr54roRkgmB2GXCsGK8GXu9Hu
+```
