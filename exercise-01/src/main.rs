@@ -10,7 +10,7 @@ use solana_sdk::{
 use std::{error::Error, fs, str::FromStr};
 
 const DEFAULT_CONFIG: &str = r#"{
-    "network": "http://localhost:8899"
+    "network": "http://127.0.0.1:8899"
 }"#;
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -134,7 +134,7 @@ pub enum Network {
 impl From<Network> for String {
     fn from(network: Network) -> Self {
         match network {
-            Network::Localnet => "http://localhost:8899".to_string(),
+            Network::Localnet => "http://127.0.0.1:8899".to_string(),
             Network::Devnet => "https://api.devnet.solana.com".to_string(),
             Network::Testnet => "https://api.testnet.solana.com".to_string(),
         }

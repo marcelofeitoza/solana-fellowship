@@ -36,6 +36,23 @@ This CLI application is designed to interact with the Solana blockchain. It supp
 
     This sets up a local Solana blockchain instance suitable for development and testing, running on `http://localhost:8899` (which is the default RPC URL on the project).
 
+## Running the Test Script
+
+To run the `test.sh` script, follow these steps:
+
+1. Make the script executable:
+
+    ```sh
+    chmod +x ./test.sh
+    ```
+
+2. Execute the script:
+    ```sh
+    ./test.sh
+    ```
+
+This script will build the project, create wallets, request an airdrop, check balances, transfer SOL, and list wallets.
+
 ## Usage
 
 ### Create a Wallet
