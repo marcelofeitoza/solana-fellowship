@@ -33,7 +33,7 @@ impl AppConfig {
     }
 
     fn save_config(&self, file_path: &str) {
-        let data = serde_json::to_string_pretty(&self).expect("Failed to serialize config");
+        let data: String = serde_json::to_string_pretty(&self).expect("Failed to serialize config");
         fs::write(file_path, data).expect("Failed to write config file");
     }
 }

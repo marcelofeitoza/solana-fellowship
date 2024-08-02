@@ -6,7 +6,7 @@ execute() {
     if [ $? -ne 0 ]; then
         echo "Error: Command failed - $@"
         exit 1
-    fi 
+    fi
 }
 
 # Build the project
@@ -46,3 +46,4 @@ execute ./target/release/scw balance -w $RECIPIENT_WALLET_PUBKEY
 # List Wallets
 execute ./target/release/scw list-wallets -f my_wallet.json
 execute ./target/release/scw list-wallets -f recipient_wallet.json
+
