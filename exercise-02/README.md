@@ -2,6 +2,8 @@
 
 ![preview](https://github.com/user-attachments/assets/fcc5c528-38a9-41b7-a6ad-9ff4e67815c9)
 
+Preview: ![https://solana-fellowship-seven.vercel.app/](https://solana-fellowship-seven.vercel.app/)
+
 ## Overview
 
 This project is a decentralized application (dApp) built on the Solana blockchain. It provides a comprehensive interface for managing a custom Solana token. Users can create tokens, mint new tokens to their wallet, transfer tokens to other wallets, burn tokens to reduce supply, delegate token handling, and close token accounts.
