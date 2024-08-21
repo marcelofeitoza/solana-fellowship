@@ -1,0 +1,19 @@
+[toolchain]
+
+[features]
+resolution = true
+skip-lint = false
+
+[programs.localnet]
+secure-program = "8jtcEFjK9QEkBaZ34zfQrbRbpD3srJhpUH41YF7oUMiQ"
+unsecure_program = "FpUBCGHrbLVwGXkuRuAHc2ZN7vw1E5DaEBQBeec2Pp9R"
+
+[registry]
+url = "https://api.apr.dev"
+
+[provider]
+cluster = "Localnet"
+wallet = "~/.config/solana/id.json"
+
+[scripts]
+test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
