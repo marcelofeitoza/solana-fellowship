@@ -12,7 +12,6 @@ import {
 	signerIdentity,
 } from "@metaplex-foundation/umi";
 import { irysUploader } from "@metaplex-foundation/umi-uploader-irys";
-import { Connection, SendTransactionError } from "@solana/web3.js";
 import * as fs from "fs";
 import * as path from "path";
 
