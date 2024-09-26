@@ -21,9 +21,6 @@ export function AccountDetailFeature() {
         <AccountBalance address={selectedAccount.publicKey} />
         <AccountButtonGroup address={selectedAccount.publicKey} />
       </View>
-      <View style={{ marginTop: 48 }}>
-        <AccountTokens address={selectedAccount.publicKey} />
-      </View>
     </>
   );
 }
